@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.joblib
+*.pkl
+
+# Node
+node_modules/
+dist/
+build/
+.vite/
+
+# ML data (generated) - keep generators, ignore large generated CSVs optionally
+# ml/data/*.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Secrets
+*.key
+secrets/
