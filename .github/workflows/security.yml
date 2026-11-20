@@ -11,12 +11,13 @@ on:
 jobs:
   python-audit:
     runs-on: ubuntu-latest
+    if: hashFiles('backend/requirements.txt') != '' || hashFiles('ml/requirements.txt') != ''
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: pip-audit backend
+      - name: pip-audit
         run: |
           pip install pip-audit
           if [ -f backend/requirements.txt ]; then pip-audit -r backend/requirements.txt || true; fi
@@ -24,6 +25,7 @@ jobs:
 
   node-audit:
     runs-on: ubuntu-latest
+    if: hashFiles('frontend/package.json') != ''
     defaults:
       run:
         working-directory: frontend
@@ -33,7 +35,7 @@ jobs:
         with:
           node-version: "20"
       - name: npm audit
-        run: npm audit --audit-level=high || true
+        run: npm ci && npm audit --audit-level=high || true
 
   codeql:
     runs-on: ubuntu-latest
